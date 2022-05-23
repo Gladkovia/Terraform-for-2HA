@@ -6,11 +6,6 @@
 #
 #-------------------------------------------
 
-#provider "aws" {
-#  access_key               = "AKIAURNSU46W3OYK2YVD"
-#  secret_key               = "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"
-#  region = "eu-central-1"
-#}
 
 
 resource "aws_instance" "my_2ha" {
