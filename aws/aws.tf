@@ -6,23 +6,20 @@
 #
 #-------------------------------------------
 
-#provider "aws" {
-#  access_key               = "AKIAURNSU46W3OYK2YVD"
-#  secret_key               = "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"
-#  region = "eu-central-1"
-#}
 
 
 resource "aws_instance" "my_2ha" {
   ami                      = "ami-02584c1c9d05efa69"
   instance_type            = "t2.micro"
   vpc_security_group_ids   = [aws_security_group.my_ubuntu.id]
+  key_name                 = "ansible"
 
   tags                     = {
    Name                    = "Ubuntu  2HA"
    Owner                   = "Gladkov Igor"
   }
 }
+
 
 resource "aws_security_group" "my_ubuntu" {
   name                     = "Ubuntu Security Group"
