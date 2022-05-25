@@ -9,6 +9,7 @@
 
 
 resource "aws_instance" "my_2ha" {
+  count                    = 2
   ami                      = "ami-02584c1c9d05efa69"
   instance_type            = "t2.micro"
   vpc_security_group_ids   = [aws_security_group.my_ubuntu.id]
@@ -16,7 +17,7 @@ resource "aws_instance" "my_2ha" {
 
   tags                     = {
    Name                    = "Ubuntu  2HA"
-   Owner                   = "Gladkov Igor"
+   Owner                   = "Igor"
   }
 }
 
@@ -40,8 +41,37 @@ resource "aws_security_group" "my_ubuntu" {
  }
   tags                     = {
    Name                    = "Security Group 2HA"
-   Owner                   = "Gladkov Igor"
+   Owner                   = "Igor"
   }
 }
+
+resource "null_resource" "access_2ha" {
+  connection {
+    type                   = "ssh"
+#    or_each = aws_instance.my_2ha[*].private_ip
+#    host = each.key
+    host                   = aws_instance.my_2ha.*.private_ip
+    user                   = "ubuntu"
+    private_key            = file("ansible.pem")
+  }
+  provisioner "file" {
+    source      = "/home/ubuntu/Engineer-s-SOC/access_2ha.sh"
+    destination = "/home/ubuntu/access_2ha.sh"
+  }
+}
+
+
+#resource "null_resource" "access_user" {
+#  connection {
+#    type                   = "ssh"
+#    host                   = aws_instance.my_2ha[*].private_ip
+#    user                   = "ubuntu"
+#    private_key            = file("ansible.pem")
+#  }
+#  provisioner "file" {
+#    source      = "/home/ubuntu/Engineer-s-SOC/access_user.sh"
+#    destination = "/home/ubuntu/access_user.sh"
+#  }
+#}
 
 
