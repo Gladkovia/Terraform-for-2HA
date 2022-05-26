@@ -45,7 +45,7 @@ resource "aws_security_group" "my_ubuntu" {
    Owner                   = "Igor"
   }
 }
-/*
+\*
 resource "null_resource" "access_2ha" {
   connection {
     type                   = "ssh"
@@ -72,5 +72,5 @@ resource "null_resource" "access_user" {
     destination = "/home/ubuntu/access_user.sh"
   }
 }
-
+*\
 
