@@ -45,32 +45,32 @@ resource "aws_security_group" "my_ubuntu" {
    Owner                   = "Igor"
   }
 }
+/*
+resource "null_resource" "access_2ha" {
+  connection {
+    type                   = "ssh"
+    host                   = aws_instance.my_2ha.private_ip
+    user                   = "ubuntu"
+    private_key            = file("ansible.pem")
+  }
+  provisioner "file" {
+    source      = "/home/ubuntu/Engineer-s-SOC/access_2ha.sh"
+    destination = "/home/ubuntu/access_2ha.sh"
+  }
+}
 
-#resource "null_resource" "access_2ha" {
-#  connection {
-#    type                   = "ssh"
-#    host                   = aws_instance.my_2ha.private_ip
-#    user                   = "ubuntu"
-#    private_key            = file("ansible.pem")
-#  }
-#  provisioner "file" {
-#    source      = "/home/ubuntu/Engineer-s-SOC/access_2ha.sh"
-#    destination = "/home/ubuntu/access_2ha.sh"
-#  }
-#}
 
-
-#resource "null_resource" "access_user" {
-#  connection {
-#    type                   = "ssh"
-#    host                   = aws_instance.my_2ha.private_ip
-#    user                   = "ubuntu"
-#    private_key            = file("ansible.pem")
-#  }
-#  provisioner "file" {
-#    source      = "/home/ubuntu/Engineer-s-SOC/access_user.sh"
-#    destination = "/home/ubuntu/access_user.sh"
-#  }
-#}
+resource "null_resource" "access_user" {
+  connection {
+    type                   = "ssh"
+    host                   = aws_instance.my_2ha.private_ip
+    user                   = "ubuntu"
+    private_key            = file("ansible.pem")
+  }
+  provisioner "file" {
+    source      = "/home/ubuntu/Engineer-s-SOC/access_user.sh"
+    destination = "/home/ubuntu/access_user.sh"
+  }
+}
 
 
